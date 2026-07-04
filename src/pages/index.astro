@@ -1,0 +1,346 @@
+---
+import Navbar from "../components/Navbar.astro"
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Josua — Writings & Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+	<link rel="stylesheet" href="src/pages/index.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <Navbar />
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label fade-up">
+      <span class="hero-label-line"></span>
+      Developer & Writer
+    </div>
+    <h1 class="fade-up">
+      Membangun hal-hal kecil,<br>
+      menulis <span class="accent">dokumentasinya</span>.
+    </h1>
+    <p class="hero-desc fade-up">
+      Catatan tentang pengembangan web, eksperimen kecil, dan hal-hal yang saya pelajari sepanjang perjalanan sebagai developer. Fokus pada kejelasan, bukan kerumitan.
+    </p>
+    <div class="hero-actions fade-up">
+      <a href="/blog" class="btn btn-primary">
+        Baca Blog
+        <iconify-icon icon="lucide:arrow-right" width="15"></iconify-icon>
+      </a>
+      <a href="/projects" class="btn btn-secondary">
+        Lihat Projects
+      </a>
+    </div>
+    <div class="hero-meta fade-up">
+      <div class="hero-stat">
+        <span class="hero-stat-value">12</span>
+        <span class="hero-stat-label">Projects</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">34</span>
+        <span class="hero-stat-label">Artikel</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">2.4k</span>
+        <span class="hero-stat-label">Monthly readers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="section-header fade-up">
+      <div class="section-title-group">
+        <span class="section-label">Projects</span>
+        <h2 class="section-title">Hal yang sudah saya bangun</h2>
+      </div>
+      <a href="/projects" class="section-link">
+        Semua project
+        <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+      </a>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <div class="project-card-top">
+          <div class="project-icon indigo">
+            <iconify-icon icon="lucide:file-text" width="18"></iconify-icon>
+          </div>
+          <span class="project-status active">Active</span>
+        </div>
+        <h3>StaticDocs</h3>
+        <p>Template dokumentasi statis yang ringan. Dibangun dengan Astro dan bisa di-deploy ke mana saja tanpa server.</p>
+        <div class="project-tags">
+          <span class="project-tag">Astro</span>
+          <span class="project-tag">Markdown</span>
+          <span class="project-tag">CSS</span>
+        </div>
+        <div class="project-card-footer">
+          <span><iconify-icon icon="lucide:star" width="13"></iconify-icon> 128</span>
+          <span><iconify-icon icon="lucide:git-fork" width="13"></iconify-icon> 24</span>
+          <span>Updated 3 hari lalu</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-card-top">
+          <div class="project-icon green">
+            <iconify-icon icon="lucide:terminal" width="18"></iconify-icon>
+          </div>
+          <span class="project-status active">Active</span>
+        </div>
+        <h3>CliNote</h3>
+        <p>CLI sederhana untuk mencatat catatan cepat langsung dari terminal. Tersimpan dalam format markdown lokal.</p>
+        <div class="project-tags">
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">CLI</span>
+          <span class="project-tag">Markdown</span>
+        </div>
+        <div class="project-card-footer">
+          <span><iconify-icon icon="lucide:star" width="13"></iconify-icon> 67</span>
+          <span><iconify-icon icon="lucide:git-fork" width="13"></iconify-icon> 11</span>
+          <span>Updated 1 minggu lalu</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-card-top">
+          <div class="project-icon amber">
+            <iconify-icon icon="lucide:palette" width="18"></iconify-icon>
+          </div>
+          <span class="project-status dev">In Dev</span>
+        </div>
+        <h3>ThemeKit</h3>
+        <p>Koleksi tema warna untuk editor dan terminal. Setiap tema dirancang dengan prinsip kontras dan keterbacaan.</p>
+        <div class="project-tags">
+          <span class="project-tag">VS Code</span>
+          <span class="project-tag">Alacritty</span>
+          <span class="project-tag">JSON</span>
+        </div>
+        <div class="project-card-footer">
+          <span><iconify-icon icon="lucide:star" width="13"></iconify-icon> 43</span>
+          <span><iconify-icon icon="lucide:git-fork" width="13"></iconify-icon> 7</span>
+          <span>Updated 2 minggu lalu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="section">
+    <div class="section-header fade-up">
+      <div class="section-title-group">
+        <span class="section-label">Blog</span>
+        <h2 class="section-title">Tulisan terbaru</h2>
+      </div>
+      <a href="/blog" class="section-link">
+        Semua artikel
+        <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+      </a>
+    </div>
+    <div class="blog-grid">
+      <a href="/blog/migrasi-ke-astro" class="blog-card fade-up">
+        <div class="blog-card-top">
+          <span class="blog-category">Tutorial</span>
+          <span class="blog-date">18 Jun 2025</span>
+        </div>
+        <h3>Migrasi Blog dari Next.js ke Astro: Apa yang Saya Pelajari</h3>
+        <p>Proses migrasi dari Next.js ke Astro untuk blog personal, termasuk perbandingan performa, pengalaman developer, dan beberapa hal yang tidak saya duga.</p>
+        <div class="blog-card-bottom">
+          Baca selengkapnya
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </div>
+      </a>
+
+      <a href="/blog/menulis-dokumentasi" class="blog-card fade-up">
+        <div class="blog-card-top">
+          <span class="blog-category guide">Guide</span>
+          <span class="blog-date">05 Jun 2025</span>
+        </div>
+        <h3>Menulis Dokumentasi yang Orang Lain Mau Baca</h3>
+        <p>Tips praktis menulis dokumentasi open source yang jelas, terstruktur, dan tidak membosankan. Dilengkapi contoh sebelum-sesudah.</p>
+        <div class="blog-card-bottom">
+          Baca selengkapnya
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </div>
+      </a>
+
+      <a href="/blog/css-approach" class="blog-card fade-up">
+        <div class="blog-card-top">
+          <span class="blog-category thoughts">Thoughts</span>
+          <span class="blog-date">22 Mei 2025</span>
+        </div>
+        <h3>Mengapa Saya Kembali ke CSS Murni (dan Menyesal Tidak Melakukannya Lebih Cepat)</h3>
+        <p>Pengalaman meninggalkan utility-first framework dan kembali menulis CSS biasa. Ternyata tidak serumit yang saya bayangkan.</p>
+        <div class="blog-card-bottom">
+          Baca selengkapnya
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Transition / CTA -->
+  <div class="divider-section">
+    <div class="divider-block fade-up">
+      <div class="divider-text">
+        <h2>Tertarik berkolaborasi atau sekadar ngobrol?</h2>
+        <p>Saya selalu terbuka untuk diskusi tentang web development, dokumentasi, atau project open source. Jangan ragu untuk menghubungi.</p>
+      </div>
+      <div class="divider-links">
+        <a href="mailto:hello@devlog.id" class="divider-link-btn primary">
+          <iconify-icon icon="lucide:mail" width="15"></iconify-icon>
+          Kirim Email
+        </a>
+        <a href="https://twitter.com" target="_blank" class="divider-link-btn ghost">
+          <iconify-icon icon="lucide:twitter" width="15"></iconify-icon>
+          Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">
+            <span class="nav-logo-dot"></span>
+            Josua Aritonang
+          </a>
+          <p>Tempat menulis tentang hal-hal yang saya bangun dan pelajari. Fokus pada web development dan dokumentasi.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/uses">Uses</a></li>
+            <li><a href="/bookmarks">Bookmarks</a></li>
+            <li><a href="/rss.xml">RSS Feed</a></li>
+            <li><a href="/sitemap">Sitemap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <ul style="gap: 12px;">
+            <li>
+              <a href="mailto:hello@devlog.id" class="footer-contact-item">
+                <iconify-icon icon="lucide:mail" width="15"></iconify-icon>
+                hello@devlog.id
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com" target="_blank" class="footer-contact-item">
+                <iconify-icon icon="lucide:github" width="15"></iconify-icon>
+                @username
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com" target="_blank" class="footer-contact-item">
+                <iconify-icon icon="lucide:twitter" width="15"></iconify-icon>
+                @username
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Josua. Dibuat dengan Astro.</p>
+        <div class="footer-socials">
+          <a href="https://github.com" target="_blank" aria-label="GitHub">
+            <iconify-icon icon="lucide:github" width="17"></iconify-icon>
+          </a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+            <iconify-icon icon="lucide:twitter" width="17"></iconify-icon>
+          </a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+            <iconify-icon icon="lucide:linkedin" width="17"></iconify-icon>
+          </a>
+          <a href="/rss.xml" aria-label="RSS">
+            <iconify-icon icon="lucide:rss" width="17"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar?.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    mobileToggle?.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu?.classList.toggle('open', menuOpen);
+      mobileToggle.innerHTML = menuOpen
+        ? '<iconify-icon icon="lucide:x" width="22"></iconify-icon>'
+        : '<iconify-icon icon="lucide:menu" width="22"></iconify-icon>';
+    });
+
+    // Close mobile menu on link click
+   mobileMenu?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    
+    if (mobileToggle) {
+      mobileToggle.innerHTML = '<iconify-icon icon="lucide:menu" width="22"></iconify-icon>';
+    }
+  });
+});
+
+    // Fade-up on scroll (Intersection Observer)
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

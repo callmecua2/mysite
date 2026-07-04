@@ -1,0 +1,1203 @@
+---
+import Navbar from "../../components/Navbar.astro"
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Josua — Writings & Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #fafafa;
+      --bg-white: #ffffff;
+      --text-primary: #18181b;
+      --text-secondary: #71717a;
+      --text-tertiary: #a1a1aa;
+      --border: #e4e4e7;
+      --border-light: #f4f4f5;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-bg: #eef2ff;
+      --green: #10b981;
+      --green-bg: #ecfdf5;
+      --amber: #f59e0b;
+      --amber-bg: #fffbeb;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-lg: 16px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --max-width: 1120px;
+      --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: white;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ─── Navbar ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 250, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .navbar-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      padding: 6px 14px;
+      font-size: 13.5px;
+      font-weight: 450;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: var(--border-light);
+    }
+
+    .nav-links a.active {
+      color: var(--text-primary);
+      background: var(--bg-white);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .nav-github {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .nav-github:hover {
+      color: var(--text-primary);
+      border-color: #d4d4d8;
+      background: var(--bg-white);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      padding: 140px 24px 80px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 24px;
+    }
+
+    .hero-label-line {
+      width: 24px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 56px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      color: var(--text-primary);
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .accent {
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 520px;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #27272a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .btn-secondary {
+      background: var(--bg-white);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: #d4d4d8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .hero-meta {
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 450;
+    }
+
+    /* ─── Section ─── */
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .section-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+
+    .section-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .section-link:hover {
+      color: var(--accent);
+    }
+
+    /* ─── Project Cards ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project-card:hover {
+      border-color: var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
+    }
+
+    .project-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .project-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .project-icon.indigo {
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+
+    .project-icon.green {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .project-icon.amber {
+      background: var(--amber-bg);
+      color: var(--amber);
+    }
+
+    .project-status {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .project-status.active {
+      background: var(--green-bg);
+      color: #059669;
+    }
+
+    .project-status.dev {
+      background: var(--amber-bg);
+      color: #d97706;
+    }
+
+    .project-status.archived {
+      background: #f4f4f5;
+      color: #a1a1aa;
+    }
+
+    .project-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .project-card p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex-grow: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tag {
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      font-weight: 400;
+      padding: 3px 10px;
+      background: var(--bg);
+      border: 1px solid var(--border-light);
+      border-radius: 100px;
+      color: var(--text-secondary);
+    }
+
+    .project-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-light);
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    .project-card-footer span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ─── Blog Cards ─── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+
+    .blog-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      border-color: var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
+    }
+
+    .blog-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .blog-category {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .blog-category.tutorial { color: var(--green); background: var(--green-bg); }
+    .blog-category.thoughts { color: var(--amber); background: var(--amber-bg); }
+    .blog-category.guide { color: #8b5cf6; background: #f5f3ff; }
+
+    .blog-date {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .blog-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      line-height: 1.45;
+      transition: var(--transition);
+    }
+
+    .blog-card:hover h3 {
+      color: var(--accent);
+    }
+
+    .blog-card p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .blog-card-bottom {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .blog-card-bottom iconify-icon {
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .blog-card:hover .blog-card-bottom {
+      color: var(--accent);
+    }
+
+    .blog-card:hover .blog-card-bottom iconify-icon {
+      transform: translateX(3px);
+    }
+
+    /* ─── Transition Divider ─── */
+    .divider-section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .divider-block {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .divider-text {
+      max-width: 440px;
+    }
+
+    .divider-text h2 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .divider-text p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .divider-links {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .divider-link-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      font-family: var(--font-sans);
+      border: none;
+      cursor: pointer;
+    }
+
+    .divider-link-btn.primary {
+      background: var(--text-primary);
+      color: white;
+    }
+
+    .divider-link-btn.primary:hover {
+      background: #27272a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .divider-link-btn.ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .divider-link-btn.ghost:hover {
+      color: var(--text-primary);
+      border-color: #d4d4d8;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      border-top: 1px solid var(--border-light);
+      background: var(--bg-white);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 56px 24px 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand p {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-top: 12px;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+    }
+
+    .footer-contact-item iconify-icon {
+      color: var(--text-tertiary);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 4px;
+    }
+
+    .footer-socials a {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      color: var(--text-tertiary);
+      font-size: 17px;
+      transition: var(--transition);
+    }
+
+    .footer-socials a:hover {
+      color: var(--text-primary);
+      background: var(--bg);
+    }
+
+    /* ─── Fade-in Animation ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up:nth-child(2) { transition-delay: 60ms; }
+    .fade-up:nth-child(3) { transition-delay: 120ms; }
+    .fade-up:nth-child(4) { transition-delay: 180ms; }
+
+    /* ─── Mobile Menu ─── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 450;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--text-primary);
+      background: var(--bg);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-github {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 120px 24px 60px;
+      }
+
+      .hero-meta {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .projects-grid,
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      .divider-block {
+        flex-direction: column;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .divider-text {
+        max-width: 100%;
+      }
+
+      .divider-links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .divider-link-btn {
+        justify-content: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero-desc {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <Navbar />
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label fade-up">
+      <span class="hero-label-line"></span>
+      Developer & Writer
+    </div>
+    <h1 class="fade-up">
+      Membangun hal-hal kecil,<br>
+      menulis <span class="accent">dokumentasinya</span>.
+    </h1>
+    <p class="hero-desc fade-up">
+      Catatan tentang pengembangan web, eksperimen kecil, dan hal-hal yang saya pelajari sepanjang perjalanan sebagai developer. Fokus pada kejelasan, bukan kerumitan.
+    </p>
+    <div class="hero-actions fade-up">
+      <a href="/blog" class="btn btn-primary">
+        Baca Blog
+        <iconify-icon icon="lucide:arrow-right" width="15"></iconify-icon>
+      </a>
+      <a href="/projects" class="btn btn-secondary">
+        Lihat Projects
+      </a>
+    </div>
+    <div class="hero-meta fade-up">
+      <div class="hero-stat">
+        <span class="hero-stat-value">12</span>
+        <span class="hero-stat-label">Projects</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">34</span>
+        <span class="hero-stat-label">Artikel</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">2.4k</span>
+        <span class="hero-stat-label">Monthly readers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section">
+    <div class="section-header fade-up">
+      <div class="section-title-group">
+        <span class="section-label">Projects</span>
+        <h2 class="section-title">Hal yang sudah saya bangun</h2>
+      </div>
+      <a href="/projects" class="section-link">
+        Semua project
+        <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+      </a>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <div class="project-card-top">
+          <div class="project-icon indigo">
+            <iconify-icon icon="lucide:file-text" width="18"></iconify-icon>
+          </div>
+          <span class="project-status active">Active</span>
+        </div>
+        <h3>StaticDocs</h3>
+        <p>Template dokumentasi statis yang ringan. Dibangun dengan Astro dan bisa di-deploy ke mana saja tanpa server.</p>
+        <div class="project-tags">
+          <span class="project-tag">Astro</span>
+          <span class="project-tag">Markdown</span>
+          <span class="project-tag">CSS</span>
+        </div>
+        <div class="project-card-footer">
+          <span><iconify-icon icon="lucide:star" width="13"></iconify-icon> 128</span>
+          <span><iconify-icon icon="lucide:git-fork" width="13"></iconify-icon> 24</span>
+          <span>Updated 3 hari lalu</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-card-top">
+          <div class="project-icon green">
+            <iconify-icon icon="lucide:terminal" width="18"></iconify-icon>
+          </div>
+          <span class="project-status active">Active</span>
+        </div>
+        <h3>CliNote</h3>
+        <p>CLI sederhana untuk mencatat catatan cepat langsung dari terminal. Tersimpan dalam format markdown lokal.</p>
+        <div class="project-tags">
+          <span class="project-tag">Node.js</span>
+          <span class="project-tag">CLI</span>
+          <span class="project-tag">Markdown</span>
+        </div>
+        <div class="project-card-footer">
+          <span><iconify-icon icon="lucide:star" width="13"></iconify-icon> 67</span>
+          <span><iconify-icon icon="lucide:git-fork" width="13"></iconify-icon> 11</span>
+          <span>Updated 1 minggu lalu</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-card-top">
+          <div class="project-icon amber">
+            <iconify-icon icon="lucide:palette" width="18"></iconify-icon>
+          </div>
+          <span class="project-status dev">In Dev</span>
+        </div>
+        <h3>ThemeKit</h3>
+        <p>Koleksi tema warna untuk editor dan terminal. Setiap tema dirancang dengan prinsip kontras dan keterbacaan.</p>
+        <div class="project-tags">
+          <span class="project-tag">VS Code</span>
+          <span class="project-tag">Alacritty</span>
+          <span class="project-tag">JSON</span>
+        </div>
+        <div class="project-card-footer">
+          <span><iconify-icon icon="lucide:star" width="13"></iconify-icon> 43</span>
+          <span><iconify-icon icon="lucide:git-fork" width="13"></iconify-icon> 7</span>
+          <span>Updated 2 minggu lalu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="section">
+    <div class="section-header fade-up">
+      <div class="section-title-group">
+        <span class="section-label">Blog</span>
+        <h2 class="section-title">Tulisan terbaru</h2>
+      </div>
+      <a href="/blog" class="section-link">
+        Semua artikel
+        <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+      </a>
+    </div>
+    <div class="blog-grid">
+      <a href="/blog/migrasi-ke-astro" class="blog-card fade-up">
+        <div class="blog-card-top">
+          <span class="blog-category">Tutorial</span>
+          <span class="blog-date">18 Jun 2025</span>
+        </div>
+        <h3>Migrasi Blog dari Next.js ke Astro: Apa yang Saya Pelajari</h3>
+        <p>Proses migrasi dari Next.js ke Astro untuk blog personal, termasuk perbandingan performa, pengalaman developer, dan beberapa hal yang tidak saya duga.</p>
+        <div class="blog-card-bottom">
+          Baca selengkapnya
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </div>
+      </a>
+
+      <a href="/blog/menulis-dokumentasi" class="blog-card fade-up">
+        <div class="blog-card-top">
+          <span class="blog-category guide">Guide</span>
+          <span class="blog-date">05 Jun 2025</span>
+        </div>
+        <h3>Menulis Dokumentasi yang Orang Lain Mau Baca</h3>
+        <p>Tips praktis menulis dokumentasi open source yang jelas, terstruktur, dan tidak membosankan. Dilengkapi contoh sebelum-sesudah.</p>
+        <div class="blog-card-bottom">
+          Baca selengkapnya
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </div>
+      </a>
+
+      <a href="/blog/css-approach" class="blog-card fade-up">
+        <div class="blog-card-top">
+          <span class="blog-category thoughts">Thoughts</span>
+          <span class="blog-date">22 Mei 2025</span>
+        </div>
+        <h3>Mengapa Saya Kembali ke CSS Murni (dan Menyesal Tidak Melakukannya Lebih Cepat)</h3>
+        <p>Pengalaman meninggalkan utility-first framework dan kembali menulis CSS biasa. Ternyata tidak serumit yang saya bayangkan.</p>
+        <div class="blog-card-bottom">
+          Baca selengkapnya
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Transition / CTA -->
+  <div class="divider-section">
+    <div class="divider-block fade-up">
+      <div class="divider-text">
+        <h2>Tertarik berkolaborasi atau sekadar ngobrol?</h2>
+        <p>Saya selalu terbuka untuk diskusi tentang web development, dokumentasi, atau project open source. Jangan ragu untuk menghubungi.</p>
+      </div>
+      <div class="divider-links">
+        <a href="mailto:hello@devlog.id" class="divider-link-btn primary">
+          <iconify-icon icon="lucide:mail" width="15"></iconify-icon>
+          Kirim Email
+        </a>
+        <a href="https://twitter.com" target="_blank" class="divider-link-btn ghost">
+          <iconify-icon icon="lucide:twitter" width="15"></iconify-icon>
+          Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo">
+            <span class="nav-logo-dot"></span>
+            Josua Aritonang
+          </a>
+          <p>Tempat menulis tentang hal-hal yang saya bangun dan pelajari. Fokus pada web development dan dokumentasi.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/uses">Uses</a></li>
+            <li><a href="/bookmarks">Bookmarks</a></li>
+            <li><a href="/rss.xml">RSS Feed</a></li>
+            <li><a href="/sitemap">Sitemap</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <ul style="gap: 12px;">
+            <li>
+              <a href="mailto:hello@devlog.id" class="footer-contact-item">
+                <iconify-icon icon="lucide:mail" width="15"></iconify-icon>
+                hello@devlog.id
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com" target="_blank" class="footer-contact-item">
+                <iconify-icon icon="lucide:github" width="15"></iconify-icon>
+                @username
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com" target="_blank" class="footer-contact-item">
+                <iconify-icon icon="lucide:twitter" width="15"></iconify-icon>
+                @username
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Josua. Dibuat dengan Astro.</p>
+        <div class="footer-socials">
+          <a href="https://github.com" target="_blank" aria-label="GitHub">
+            <iconify-icon icon="lucide:github" width="17"></iconify-icon>
+          </a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+            <iconify-icon icon="lucide:twitter" width="17"></iconify-icon>
+          </a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+            <iconify-icon icon="lucide:linkedin" width="17"></iconify-icon>
+          </a>
+          <a href="/rss.xml" aria-label="RSS">
+            <iconify-icon icon="lucide:rss" width="17"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar?.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    mobileToggle?.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu?.classList.toggle('open', menuOpen);
+      mobileToggle.innerHTML = menuOpen
+        ? '<iconify-icon icon="lucide:x" width="22"></iconify-icon>'
+        : '<iconify-icon icon="lucide:menu" width="22"></iconify-icon>';
+    });
+
+    // Close mobile menu on link click
+   mobileMenu?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    
+    if (mobileToggle) {
+      mobileToggle.innerHTML = '<iconify-icon icon="lucide:menu" width="22"></iconify-icon>';
+    }
+  });
+});
+
+    // Fade-up on scroll (Intersection Observer)
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
